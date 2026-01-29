@@ -1,4 +1,4 @@
-# 📦 Estoque Pro - Fullstack CRUD
+# 📦 Estoque Produto - Fullstack CRUD
 
 Este é um sistema de gerenciamento de estoque completo, desenvolvido para demonstrar habilidades em integração entre um backend robusto em **Spring Boot** e um frontend moderno e reativo em **React**.
 
@@ -66,5 +66,4 @@ Acesse no seu navegador: http://localhost:5173
 
 [x] Interface totalmente responsiva.
 
-✒️ Autor
 Desenvolvido por Lucas Santana - 
