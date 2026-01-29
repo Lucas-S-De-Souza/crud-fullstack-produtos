@@ -1,0 +1,30 @@
+# Java / Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+build/
+.mtj.tmp/
+*.class
+*.jar
+*.war
+*.ear
+
+# Node / React
+node_modules/
+dist/
+dist-ssr/
+*.local
+.eslintcache
+
+# IDEs (VS Code, IntelliJ)
+.vscode/
+.idea/
+*.swp
+*.iml
+.classpath
+.project
+.settings/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

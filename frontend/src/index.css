@@ -1,0 +1,101 @@
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --danger: #ef4444;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.app-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0; }
+p { color: #64748b; margin-top: 5px; }
+
+/* Estilo do Card (Formulário e Tabela) */
+.card {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+input:focus { border-color: var(--primary); ring: 2px solid #6366f133; }
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover { background: var(--primary-hover); }
+
+.btn-delete {
+  background: transparent;
+  color: var(--danger);
+  padding: 6px 12px;
+  border: 1px solid var(--danger);
+}
+
+.btn-delete:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* Tabela Moderna */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 16px;
+  background: #f1f5f9;
+  font-weight: 600;
+  color: #475569;
+}
+
+td {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+tr:hover { background: #f8fafc; }
