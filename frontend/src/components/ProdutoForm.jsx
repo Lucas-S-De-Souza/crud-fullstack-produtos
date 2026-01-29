@@ -1,18 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // IMPORTAR O USEEFFECT
 import { api } from "../services/api";
 
-function ProdutoForm({ atualizarLista }) {
+// RECEBER AS PROPS CORRETAMENTE
+function ProdutoForm({
+  atualizarLista,
+  produtoParaEditar,
+  setProdutoParaEditar,
+}) {
   const [nome, setNome] = useState("");
   const [preco, setPreco] = useState("");
+  const [quantidade, setQuantidade] = useState("");
+
+  useEffect(() => {
+    if (produtoParaEditar) {
+      setNome(produtoParaEditar.nome);
+      setPreco(produtoParaEditar.preco);
+      setQuantidade(produtoParaEditar.quantidade);
+    }
+  }, [produtoParaEditar]);
 
   function salvar(e) {
     e.preventDefault();
-    // Mudamos a rota para /produtos e os campos para nome e preco
-    api.post("/produtos", { nome, preco: parseFloat(preco) }).then(() => {
-      setNome("");
-      setPreco("");
-      atualizarLista();
-    }).catch(err => alert("Erro ao salvar! Verifique os dados."));
+    const dados = { nome, preco, quantidade: parseInt(quantidade) };
+
+    if (produtoParaEditar) {
+      // MODO EDIÇÃO (PUT)
+      api
+        .put(`/produtos/${produtoParaEditar.id}`, dados)
+        .then(() => {
+          console.log("Editado com sucesso!");
+          setProdutoParaEditar(null); // Sai do modo edição
+          limparECarregar(); // Limpa campos e CHAMA O GET NOVAMENTE
+        })
+        .catch((err) => console.error("Erro ao editar:", err));
+    } else {
+      // MODO CRIAÇÃO (POST)
+      api
+        .post("/produtos", dados)
+        .then(() => {
+          limparECarregar();
+        })
+        .catch((err) => console.error("Erro ao salvar:", err));
+    }
+  }
+
+  function limparECarregar() {
+    setNome("");
+    setPreco("");
+    setQuantidade("");
+    atualizarLista();
   }
 
   return (
@@ -20,17 +56,47 @@ function ProdutoForm({ atualizarLista }) {
       <input
         placeholder="Nome do Produto"
         value={nome}
-        onChange={e => setNome(e.target.value)}
+        onChange={(e) => setNome(e.target.value)}
         required
       />
       <input
-        placeholder="Preço (Ex: 1500.00)"
+        placeholder="Preço"
         type="number"
+        step="0.01"
         value={preco}
-        onChange={e => setPreco(e.target.value)}
+        onChange={(e) => setPreco(e.target.value)}
         required
       />
-      <button type="submit">Cadastrar Produto</button>
+      <input
+        placeholder="Quantidade"
+        type="number"
+        value={quantidade}
+        onChange={(e) => setQuantidade(e.target.value)}
+        required
+      />
+      <button
+        type="submit"
+        style={{
+          background: produtoParaEditar ? "#eab308" : "#6366f1",
+          color: "white",
+        }}
+      >
+        {produtoParaEditar ? "Salvar Alterações" : "Cadastrar Produto"}
+      </button>
+
+      {produtoParaEditar && (
+        <button
+          type="button"
+          onClick={() => {
+            setProdutoParaEditar(null);
+            setNome("");
+            setPreco("");
+          }}
+          style={{ background: "#64748b", marginLeft: "10px", color: "white" }}
+        >
+          Cancelar
+        </button>
+      )}
     </form>
   );
 }

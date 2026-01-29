@@ -1,6 +1,6 @@
 package com.exemplo.crud.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,6 +19,9 @@ public class Produto {
     @Min(value = 0, message = "O preço não pode ser negativo")
     private Double preco;
 
+    @Column
+    private Integer quantidade;
+
     // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -26,4 +29,6 @@ public class Produto {
     public void setNome(String nome) { this.nome = nome; }
     public Double getPreco() { return preco; }
     public void setPreco(Double preco) { this.preco = preco; }
+    public Integer getQuantidade() { return quantidade; }
+    public void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
 }

@@ -33,6 +33,7 @@ public class ProdutoController {
                 .map(produto -> {
                     produto.setNome(produtoAtualizado.getNome());
                     produto.setPreco(produtoAtualizado.getPreco());
+                    produto.setQuantidade(produtoAtualizado.getQuantidade());
                     return repository.save(produto);
                 }).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
