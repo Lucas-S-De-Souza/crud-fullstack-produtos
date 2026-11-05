@@ -2,6 +2,8 @@
 
 Este é um sistema de gerenciamento de estoque completo, desenvolvido para demonstrar habilidades em integração entre um backend robusto em **Spring Boot** e um frontend moderno e reativo em **React**.
 
+> **Status:** em desenvolvimento.
+
 ---
 
 ## 🚀 Tecnologias Utilizadas
@@ -11,13 +13,13 @@ Este é um sistema de gerenciamento de estoque completo, desenvolvido para demon
 * **Spring Boot 3**
 * **Spring Data JPA**: Para persistência de dados.
 * **H2 Database**: Banco de dados em memória para testes rápidos.
-* **Bean Validation**: Garantia de integridade dos dados (ex: preços não negativos).
+* **Bean Validation**: Garantia de integridade dos dados (ex: nome obrigatório, preço e quantidade não negativos).
 * **Swagger (OpenAPI)**: Documentação interativa da API.
 
 ### **Frontend**
 * **React** (com Vite)
 * **Axios**: Para consumo da API REST.
-* **CSS Moderno**: Interface limpa e responsiva focada em experiência do usuário (UX).
+* **CSS Moderno**: Interface limpa e responsiva, com tema claro e escuro automático.
 
 ---
 
@@ -26,44 +28,47 @@ Este é um sistema de gerenciamento de estoque completo, desenvolvido para demon
 ### 1. Pré-requisitos
 * Java 17 ou superior instalado.
 * Node.js instalado.
-* Maven instalado (ou usar o wrapper do projeto).
+* Maven instalado.
 
 ### 2. Rodando o Backend
-1. Entre na pasta `backend`:
-   ```bash
-   cd backend
 
-2.Execute a aplicação:
-Bash
+Entre na pasta `backend` e execute a aplicação:
+
+```bash
+cd backend
 mvn spring-boot:run
+```
+
 O servidor estará rodando em http://localhost:8080.
 
 Acesse a documentação da API em: http://localhost:8080/swagger-ui/index.html
 
-3. Rodando o Frontend
-Em outro terminal, entre na pasta frontend:
+### 3. Rodando o Frontend
 
-Bash
+Em outro terminal, entre na pasta `frontend`, instale as dependências e inicie o projeto:
+
+```bash
 cd frontend
-Instale as dependências:
-
-Bash
 npm install
-Inicie o projeto:
-
-Bash
 npm run dev
+```
+
 Acesse no seu navegador: http://localhost:5173
 
-📌 Funcionalidades
-[x] Cadastro de produtos com validação.
+> Os dados ficam em memória (H2): ao reiniciar o backend, os produtos cadastrados são apagados.
 
-[x] Listagem em tempo real de itens em estoque.
+---
 
-[x] Atualização de preços e nomes.
+## 📌 Funcionalidades
 
-[x] Exclusão de itens com confirmação.
+- [x] Cadastro de produtos com validação.
+- [x] Listagem dos produtos em estoque, com busca por nome.
+- [x] Edição de nome, preço e quantidade.
+- [x] Exclusão de itens com confirmação.
+- [x] Resumo do estoque (total de produtos, itens e valor).
+- [x] Interface responsiva.
+- [ ] Persistência em banco de dados real (hoje os dados somem ao reiniciar o backend).
 
-[x] Interface totalmente responsiva.
+---
 
-Desenvolvido por Lucas Santana - 
+Desenvolvido por Lucas Santana.
