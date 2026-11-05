@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { api, mensagemDeErro } from "./services/api";
+import { api, mensagemDeErro, modoDemo } from "./services/api";
 import Modal from "./components/Modal";
 import ProdutoForm from "./components/ProdutoForm";
 
@@ -108,6 +108,13 @@ export default function App() {
         </div>
         <button className="btn btn-primario" onClick={() => abrirForm()}>+ Novo produto</button>
       </header>
+
+      {modoDemo && (
+        <p className="aviso-demo">
+          Modo demonstração: os dados ficam salvos só no seu navegador. A versão completa usa uma
+          API em Java com Spring Boot (veja o README para rodar no seu computador).
+        </p>
+      )}
 
       <section className="resumo" aria-label="Resumo do estoque">
         <div className="stat"><span>Produtos</span><strong>{produtos.length}</strong></div>

@@ -4,31 +4,37 @@ Este é um sistema de gerenciamento de estoque completo, desenvolvido para demon
 
 > **Status:** em desenvolvimento.
 
+🔗 **Demonstração online:** https://lucas-s-de-souza.github.io/crud-fullstack-produtos/
+_(modo demonstração: roda só o front-end, sem a API em Java; os dados ficam salvos no seu navegador)_
+
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
 ### **Backend**
-* **Java 17**
-* **Spring Boot 3**
-* **Spring Data JPA**: Para persistência de dados.
-* **H2 Database**: Banco de dados em memória para testes rápidos.
-* **Bean Validation**: Garantia de integridade dos dados (ex: nome obrigatório, preço e quantidade não negativos).
-* **Swagger (OpenAPI)**: Documentação interativa da API.
+
+- **Java 17**
+- **Spring Boot 3**
+- **Spring Data JPA**: Para persistência de dados.
+- **H2 Database**: Banco de dados em memória para testes rápidos.
+- **Bean Validation**: Garantia de integridade dos dados (ex: nome obrigatório, preço e quantidade não negativos).
+- **Swagger (OpenAPI)**: Documentação interativa da API.
 
 ### **Frontend**
-* **React** (com Vite)
-* **Axios**: Para consumo da API REST.
-* **CSS Moderno**: Interface limpa e responsiva, com tema claro e escuro automático.
+
+- **React** (com Vite)
+- **Axios**: Para consumo da API REST.
+- **CSS Moderno**: Interface limpa e responsiva, com tema claro e escuro automático.
 
 ---
 
 ## 🛠️ Como Executar o Projeto
 
 ### 1. Pré-requisitos
-* Java 17 ou superior instalado.
-* Node.js instalado.
-* Maven instalado.
+
+- Java 17 ou superior instalado.
+- Node.js instalado.
+- Maven instalado.
 
 ### 2. Rodando o Backend
 
@@ -71,4 +77,4 @@ Acesse no seu navegador: http://localhost:5173
 
 ---
 
-Desenvolvido por Lucas Santana.
+Desenvolvido por Lucas Santana
