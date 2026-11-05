@@ -1,104 +1,53 @@
-import { useState, useEffect } from "react"; // IMPORTAR O USEEFFECT
-import { api } from "../services/api";
+import { useState } from "react";
 
-// RECEBER AS PROPS CORRETAMENTE
-function ProdutoForm({
-  atualizarLista,
-  produtoParaEditar,
-  setProdutoParaEditar,
-}) {
-  const [nome, setNome] = useState("");
-  const [preco, setPreco] = useState("");
-  const [quantidade, setQuantidade] = useState("");
+// O estado inicial vem de "inicial". O pai usa "key" para recriar o formulário
+// a cada produto, então não precisa de useEffect para preencher os campos.
+export default function ProdutoForm({ inicial, salvando, erro, onSalvar, onCancelar }) {
+  const [nome, setNome] = useState(inicial?.nome ?? "");
+  const [preco, setPreco] = useState(inicial?.preco ?? "");
+  const [quantidade, setQuantidade] = useState(inicial?.quantidade ?? "");
 
-  useEffect(() => {
-    if (produtoParaEditar) {
-      setNome(produtoParaEditar.nome);
-      setPreco(produtoParaEditar.preco);
-      setQuantidade(produtoParaEditar.quantidade);
-    }
-  }, [produtoParaEditar]);
-
-  function salvar(e) {
+  function enviar(e) {
     e.preventDefault();
-    const dados = { nome, preco, quantidade: parseInt(quantidade) };
-
-    if (produtoParaEditar) {
-      // MODO EDIÇÃO (PUT)
-      api
-        .put(`/produtos/${produtoParaEditar.id}`, dados)
-        .then(() => {
-          console.log("Editado com sucesso!");
-          setProdutoParaEditar(null); // Sai do modo edição
-          limparECarregar(); // Limpa campos e CHAMA O GET NOVAMENTE
-        })
-        .catch((err) => console.error("Erro ao editar:", err));
-    } else {
-      // MODO CRIAÇÃO (POST)
-      api
-        .post("/produtos", dados)
-        .then(() => {
-          limparECarregar();
-        })
-        .catch((err) => console.error("Erro ao salvar:", err));
-    }
-  }
-
-  function limparECarregar() {
-    setNome("");
-    setPreco("");
-    setQuantidade("");
-    atualizarLista();
+    onSalvar({
+      nome: nome.trim(),
+      preco: Math.round(Number(preco) * 100) / 100,
+      quantidade: parseInt(quantidade, 10),
+    });
   }
 
   return (
-    <form onSubmit={salvar} className="form-container">
-      <input
-        placeholder="Nome do Produto"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
-        required
-      />
-      <input
-        placeholder="Preço"
-        type="number"
-        step="0.01"
-        value={preco}
-        onChange={(e) => setPreco(e.target.value)}
-        required
-      />
-      <input
-        placeholder="Quantidade"
-        type="number"
-        value={quantidade}
-        onChange={(e) => setQuantidade(e.target.value)}
-        required
-      />
-      <button
-        type="submit"
-        style={{
-          background: produtoParaEditar ? "#eab308" : "#6366f1",
-          color: "white",
-        }}
-      >
-        {produtoParaEditar ? "Salvar Alterações" : "Cadastrar Produto"}
-      </button>
+    <form onSubmit={enviar} className="form">
+      <label>
+        Nome do produto
+        <input value={nome} onChange={(e) => setNome(e.target.value)} maxLength={120} required autoFocus />
+      </label>
 
-      {produtoParaEditar && (
-        <button
-          type="button"
-          onClick={() => {
-            setProdutoParaEditar(null);
-            setNome("");
-            setPreco("");
-          }}
-          style={{ background: "#64748b", marginLeft: "10px", color: "white" }}
-        >
-          Cancelar
+      <div className="linha">
+        <label>
+          Preço (R$)
+          <input
+            type="number" min="0" step="any" inputMode="decimal"
+            value={preco} onChange={(e) => setPreco(e.target.value)} required
+          />
+        </label>
+        <label>
+          Quantidade
+          <input
+            type="number" min="0" step="1" inputMode="numeric"
+            value={quantidade} onChange={(e) => setQuantidade(e.target.value)} required
+          />
+        </label>
+      </div>
+
+      {erro && <p className="erro" role="alert">{erro}</p>}
+
+      <div className="acoes">
+        <button type="button" className="btn btn-ghost" onClick={onCancelar}>Cancelar</button>
+        <button type="submit" className="btn btn-primario" disabled={salvando}>
+          {salvando ? "Salvando..." : inicial ? "Salvar alterações" : "Cadastrar produto"}
         </button>
-      )}
+      </div>
     </form>
   );
 }
-
-export default ProdutoForm;
